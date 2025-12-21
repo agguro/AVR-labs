@@ -1,0 +1,102 @@
+# Build outputs (AVR / C / ASM)
+
+*.o
+*.a
+*.elf
+*.hex
+*.bin
+*.map
+*.lss
+*.lst
+*.sym
+*.eep
+*.cof
+*.obj
+
+# Dependency & temp files
+
+*.d
+*.tmp
+*.log
+*.bak
+*.old
+*.swp
+*.swo
+
+# Build directories
+
+build/
+_build/
+.build/
+out/
+dist/
+release/
+
+# Arduino IDE / Arduino CLI
+
+*.arduino.*
+*.ino~
+*.pde~
+.arduino/
+.arduino15/
+arduino-cli.yaml
+
+# Python
+
+__pycache__/
+*.py[cod]
+*$py.class
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+# Packaging / build
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+build-python/
+.python-version
+# Test / coverage
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+
+# Simulation / debugging
+
+*.gdb
+*.dbg
+qemu-*
+*.trace
+
+# Editor / IDE
+
+.vscode/
+.idea/
+*.code-workspace
+*.iml
+
+# OS specific
+
+.DS_Store
+Thumbs.db
+
+# Local-only / developer overrides
+
+.gitignore.local
+
+# DO NOT ignore source files
+
+!*.c
+!*.h
+!*.S
+!*.s
+!*.asm
+!*.ld
+!*.ino
+!*.py
+!Makefile
+!*.mk
+
