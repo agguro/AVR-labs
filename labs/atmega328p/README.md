@@ -1,12 +1,12 @@
 # Lab 01: Blink (The Reverse Engineering Cycle)
 
-[cite_start]This lab demonstrates the complete workflow of deconstructing an Arduino Blink sketch and recreating it in cycle-accurate Assembly. [cite: 8, 15]
+This lab demonstrates the complete workflow of deconstructing an Arduino Blink sketch and recreating it in cycle-accurate Assembly.
 
 ## Workflow
-1. [cite_start]**Reversing**: Automated extraction of assembly from C++ code. [cite: 20]
+1. **Reversing**: Automated extraction of assembly from C++ code.
 2. **Implementation**: Manual, optimized assembly programming with stack control.
-3. [cite_start]**Simulation**: Real-time verification via Unix Domain Sockets. [cite: 1]
-4. [cite_start]**Flashing**: Direct hardware deployment via the custom flash tool. [cite: 6]
+3. **Simulation**: Real-time verification via Unix Domain Sockets.
+4. **Flashing**: Direct hardware deployment via the custom flash tool.
 
 ## Commands
 * **Extract Assembly**: `meson compile -C build reversing`
