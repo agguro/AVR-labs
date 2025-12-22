@@ -20,7 +20,7 @@ The goal is not only to use microcontrollers, but to truly understand them.
 This repository is intended for educational and non-commercial use.  
 Commercial use requires explicit permission from the author.
 
-## 👤 Maintainer
+## Maintainer
 
 <p align="left">
   <img src="images/agguro/agguro-icon.png" width="16" alt="agguro">
