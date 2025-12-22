@@ -31,6 +31,7 @@ _build/
 out/
 dist/
 release/
+archive/
 
 # Arduino IDE / Arduino CLI
 
