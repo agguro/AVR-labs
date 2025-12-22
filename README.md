@@ -26,8 +26,8 @@ Commercial use requires explicit permission from the author.
 
 ## 👤 Maintainer
 
-<p align="center">
-  <img src="images/agguro/agguro-icon.png" width="64" alt="agguro"><br>
+<p align="left">
+  <img src="images/agguro/agguro-icon.png" width="32" alt="agguro"><br>
   <strong>agguro</strong><br>
   📧 <a href="mailto:info@agguro.be">info@agguro.be</a>
 </p>
