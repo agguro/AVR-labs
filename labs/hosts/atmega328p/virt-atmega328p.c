@@ -84,6 +84,7 @@ int main(int argc, char **argv) {
     
     // Register GPIO hooks (PORTB Pin 5 / Built-in LED)
     avr_irq_t *pb5_irq = avr_io_getirq(avr, AVR_IOCTL_IOPORT_GETIRQ('B'), 5);
+    
     avr_irq_register_notify(pb5_irq, pb5_changed_hook, NULL);
 
     // Timing state
