@@ -19,7 +19,7 @@ A simulação permite aprender em ambientes onde o hardware não está disponív
 Cada laboratório centra-se na compreensão, e não apenas em fazer algo funcionar.  
 O objetivo não é apenas utilizar microcontroladores, mas compreendê-los verdadeiramente.
 
-➡️ Consulta a documentação em [Documentation](../index/)
+➡️ Consulta a documentação em [Documentation](../docs/index/README.pt.md)
 
 ## Licença e utilização
 

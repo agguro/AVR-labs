@@ -19,7 +19,7 @@ Simulatie maakt leren mogelijk in omgevingen waar hardware niet beschikbaar of t
 Elk lab legt de nadruk op begrip, niet alleen op het laten werken van iets.  
 Het doel is niet alleen microcontrollers gebruiken, maar ze echt begrijpen.
 
-➡️ Bekijk de documentatie via [Documentatie](../index/)
+➡️ Bekijk de documentatie via [Documentatie](../docs/index/README.nl.md)
 
 ## Licentie en gebruik
 

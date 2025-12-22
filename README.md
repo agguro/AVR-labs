@@ -19,7 +19,7 @@ Simulation allows learning in environments where hardware is unavailable or too 
 Each lab focuses on understanding, not just making something work.  
 The goal is not only to use microcontrollers, but to truly understand them.
 
-➡️ See the documentation in the [Documentation](docs/)
+➡️ See the documentation in the [Documentation](docs/index)
 
 ## License and use
 
