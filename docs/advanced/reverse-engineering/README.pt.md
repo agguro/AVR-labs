@@ -1,3 +1,4 @@
+[Home](../../../README.md)  -  [Docs index](../../index/README.md)
 [🇬🇧](README.md)  -  [🇳🇱](README.nl.md)  -  [🇨🇴](README.es-co.md)  -  [🇵🇹](README.pt.md)
 
 # Estudo de firmware compilado (avançado)

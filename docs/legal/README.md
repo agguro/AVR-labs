@@ -1,4 +1,5 @@
-[🇬🇧](README.md)  -  [🇳🇱](README.nl.md)  -  [🇨🇴](README.es-co.md)  -  [🇵🇹](README.pt.md)
+[Home](../../README.md)  -  [Docs index](../index/README.md) 
+[🇬🇧](README.md)  -  [🇳🇱](README.nl.md)  -  [🇨🇴](README.es-co.md)  -  [🇵🇹)](README.pt.md)
 
 # Legal and Ethical Use
 
