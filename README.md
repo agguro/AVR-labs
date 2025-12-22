@@ -1,4 +1,4 @@
-🇬🇧 [English](README.md)  -  🇳🇱 [Nederlands](README.nl.md)  -  🇨🇴 [Español (Colombia)](README.es-co.md)  -  🇵🇹 [Português (Portugal)](README.pt.md)
+🇬🇧 (README.md)  -  🇳🇱 (README.nl.md)  -  🇨🇴 (README.es-co.md)  -  🇵🇹 (README.pt.md)
 
 # AVR-labs
 
@@ -23,9 +23,8 @@ Commercial use requires explicit permission from the author.
 ## 👤 Maintainer
 
 <p align="left">
-  <img src="images/agguro/agguro-icon.png" width="32" alt="agguro">
-  <strong>agguro</strong>
-  <a href="mailto:info@agguro.be">info@agguro.be</a>
+  <img src="images/agguro/agguro-icon.png" width="16" alt="agguro">
+  <a href="mailto:info@agguro.be">agguro</a>
 </p>
 
 For questions, feedback, or error reports, feel free to get in touch.
