@@ -1,8 +1,5 @@
-🌍 **Languages**  
-- 🇬🇧 [English](legal-ethical-use.md)  
-- 🇳🇱 [Nederlands](legal-ethical-use.nl.md)  
-- 🇨🇴 [Español (Colombia)](legal-ethical-use.es-co.md)  
-- 🇵🇹 [Português (Portugal)](legal-ethical-use.pt.md)
+[🇬🇧](legal-ethical-use.md)  -  [🇳🇱](legal-ethical-use.nl.md)  -  [🇨🇴](legal-ethical-use.es-co.md)  - [🇵🇹](legal-ethical-use.pt.md)
+
 
 # Juridisch en ethisch gebruik
 

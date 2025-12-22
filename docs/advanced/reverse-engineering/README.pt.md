@@ -1,8 +1,4 @@
-🌍 **Languages**  
-- 🇬🇧 [English](reverse-engineering.md)  
-- 🇳🇱 [Nederlands](reverse-engineering.nl.md)  
-- 🇨🇴 [Español (Colombia)](reverse-engineering.es-co.md)  
-- 🇵🇹 [Português (Portugal)](reverse-engineering.pt.md)
+[🇬🇧](reverse-engineering.md)  -  [🇳🇱](reverse-engineering.nl.md)  -  [🇨🇴](reverse-engineering.es-co.md)  -  [🇵🇹 (Portugal)](reverse-engineering.pt.md)
 
 # Estudo de firmware compilado (avançado)
 

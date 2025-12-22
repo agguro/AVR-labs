@@ -1,8 +1,4 @@
-🌍 **Languages**  
-- 🇬🇧 [English](learning-paths.md)  
-- 🇳🇱 [Nederlands](learning-paths.nl.md)  
-- 🇨🇴 [Español (Colombia)](learning-paths.es-co.md)  
-- 🇵🇹 [Português (Portugal)](learning-paths.pt.md)
+[🇬🇧](learning-paths.md)  -  [🇳🇱](learning-paths.nl.md)  -  [🇨🇴](learning-paths.es-co.md)  -  [🇵🇹](learning-paths.pt.md)
 
 # Percursos de Aprendizagem
 

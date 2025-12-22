@@ -1,8 +1,5 @@
-🌍 **Languages**  
-- 🇬🇧 [English](how-to-use.md)  
-- 🇳🇱 [Nederlands](how-to-use.nl.md)  
-- 🇨🇴 [Español (Colombia)](how-to-use.es-co.md)  
-- 🇵🇹 [Português (Portugal)](how-to-use.pt.md)
+[🇬🇧](how-to-use.md)  -  [🇳🇱](how-to-use.nl.md)  -  [🇨🇴](how-to-use.es-co.md)  -  [🇵🇹](how-to-use.pt.md)
+
 
 # Como utilizar este repositório
 
