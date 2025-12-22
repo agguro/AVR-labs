@@ -15,5 +15,5 @@ avr_ld      = find_program('avr-ld', required: true)
 avr_objcopy = find_program('avr-objcopy', required: true)
 
 # 3. Subsystems
-subdir('labs')         # Compiled with host GCC
-
+subdir('labs')
+subdir('tools')
