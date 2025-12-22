@@ -1,4 +1,4 @@
-[🇬🇧](reverse-engineering.md)  -  [🇳🇱](reverse-engineering.nl.md)  -  [🇨🇴](reverse-engineering.es-co.md)  -  [🇵🇹 (Portugal)](reverse-engineering.pt.md)
+[🇬🇧](reverse-engineering.md)  -  [🇳🇱](reverse-engineering.nl.md)  -  [🇨🇴](reverse-engineering.es-co.md)  -  [🇵🇹](reverse-engineering.pt.md)
 
 # Studying compiled firmware (advanced)
 
