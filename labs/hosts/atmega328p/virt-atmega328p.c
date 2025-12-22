@@ -93,9 +93,6 @@ int main(int argc, char **argv) {
     uint64_t last_report_cycle = 0;
     struct timespec last_report_time = start_time;
 
-    printf("\n[LOCKDOWN SYNC] Target: %.2f MHz | Controls: [+] Speed up [-] Slow down [q] Quit\n", 
-           avr->frequency / 1e6);
-
     while (1) {
         // Run a batch of instructions
         for (int i = 0; i < 5000; i++) avr_run(avr);
@@ -120,6 +117,7 @@ int main(int argc, char **argv) {
 
         if (interval >= 1.0) {
             double current_mips = (avr->cycle - last_report_cycle) / interval / 1e6;
+
             printf("\r[STATUS] Real-Time: %.1fs | Sim Performance: %.2f MHz | Target: %.2f MHz    ", 
                    real_elapsed, current_mips, avr->frequency / 1e6);
             fflush(stdout);
@@ -127,6 +125,7 @@ int main(int argc, char **argv) {
             last_report_cycle = avr->cycle;
             last_report_time = current_time;
         }
+
     }
     
     printf("\nSimulation finished.\n");
