@@ -11,3 +11,13 @@ This lab demonstrates the complete workflow of deconstructing an Arduino Blink s
 ## Commands
 * **Extract Assembly**: `meson compile -C build reversing`
 * **Upload to Hardware**: `meson compile -C build flash`
+
+## Arduino - ATMega328P
+
+<p align="center">
+  <img src="images/arduino-uno-r3.svg" width="500">
+</p>
+
+<p align="center">
+  <img src="images/atmega328-pinout.png" width="500">
+</p>
