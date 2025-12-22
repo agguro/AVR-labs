@@ -1,4 +1,4 @@
-🇬🇧 (README.md)  -  🇳🇱 (README.nl.md)  -  🇨🇴 (README.es-co.md)  -  🇵🇹 (README.pt.md)
+🇬🇧 [English](README.md)  -  🇳🇱 [Nederlands](README.nl.md)  -  🇨🇴 [Español (Colombia)](README.es-co.md)  -  🇵🇹 [Português (Portugal)](README.pt.md)
 
 # AVR-labs
 
