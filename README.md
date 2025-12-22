@@ -24,8 +24,6 @@ Commercial use requires explicit permission from the author.
 
 <p align="left">
   <img src="images/agguro/agguro-icon.png" width="16" alt="agguro">
-  <a href="mailto:info@agguro.be">agguro</a>
+  <a href="mailto:info@agguro.be">agguro</a>For questions, feedback, or error reports, feel free to get in touch.
 </p>
-
-For questions, feedback, or error reports, feel free to get in touch.
 
