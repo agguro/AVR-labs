@@ -1,5 +1,4 @@
-[🇬🇧](legal-ethical-use.md)  -  [🇳🇱](legal-ethical-use.nl.md)  -  [🇨🇴](legal-ethical-use.es-co.md)  - [🇵🇹](legal-ethical-use.pt.md)
-
+[🇬🇧](README.md)  -  [🇳🇱](README.nl.md)  -  [🇨🇴](README.es-co.md)  -  [🇵🇹](README.pt.md)
 
 # Legal and Ethical Use
 

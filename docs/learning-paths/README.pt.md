@@ -1,4 +1,4 @@
-[🇬🇧](learning-paths.md)  -  [🇳🇱](learning-paths.nl.md)  -  [🇨🇴](learning-paths.es-co.md)  -  [🇵🇹](learning-paths.pt.md)
+[🇬🇧](README.md)  -  [🇳🇱](README.nl.md)  -  [🇨🇴](README.es-co.md)  -  [🇵🇹](README.pt.md)
 
 # Percursos de Aprendizagem
 

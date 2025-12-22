@@ -1,5 +1,4 @@
-[🇬🇧](how-to-use.md)  -  [🇳🇱](how-to-use.nl.md)  -  [🇨🇴](how-to-use.es-co.md)  -  [🇵🇹](how-to-use.pt.md)
-
+[🇬🇧](README.md)  -  [🇳🇱](README.nl.md)  -  [🇨🇴](README.es-co.md)  -  [🇵🇹](README.pt.md)
 
 # How to use this repository
 

@@ -1,4 +1,4 @@
-[🇬🇧](reverse-engineering.md)  -  [🇳🇱](reverse-engineering.nl.md)  -  [🇨🇴](reverse-engineering.es-co.md)  -  [🇵🇹](reverse-engineering.pt.md)
+[🇬🇧](README.md)  -  [🇳🇱](README.nl.md)  -  [🇨🇴](README.es-co.md)  -  [🇵🇹](README.pt.md)
 
 # Estudo de firmware compilado (avançado)
 
