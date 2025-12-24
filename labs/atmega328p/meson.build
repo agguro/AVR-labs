@@ -6,3 +6,4 @@ f_cpu = '16000000L'
 
 # --- Labs ---
 subdir('01-blink')
+subdir('02-timed-blink')
