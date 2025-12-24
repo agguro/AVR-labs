@@ -1,9 +1,14 @@
 # labs/atmega328p/meson.build
 
-# ATmega family
-mcu = 'atmega328p'
-f_cpu = '16000000L'
+# Shared Hardware Specs
+mcu       = 'atmega328p'
+emulation = 'avr5'
+f_cpu     = '16000000L'
 
-# --- Labs ---
+# Global lab binary directory (if you want all bins in one place)
+lab_bin_dir = meson.current_build_dir() / 'bin'
+
+# List the labs to be processed
 subdir('01-blink')
-subdir('02-timed-blink')
+subdir('02-timedblink')
+
