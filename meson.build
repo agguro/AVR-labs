@@ -14,6 +14,10 @@ avr_as      = find_program('avr-as', required: true)
 avr_ld      = find_program('avr-ld', required: true)
 avr_objcopy = find_program('avr-objcopy', required: true)
 
+# Your custom host simulator (the one we just adjusted)
+virt_mcu_bin = []
+
 # 3. Subsystems
+subdir('tools')			# first build tools
 subdir('labs')
-subdir('tools')
+
