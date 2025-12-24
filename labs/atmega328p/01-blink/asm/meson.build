@@ -29,17 +29,3 @@ blink_hex = custom_target(
     install: true,
     install_dir: lab_bin_dir  # <--- Use the variable
 )
-
-# Stage 4: Flash target to upload the HEX file to the physical hardware
-# Usage: meson compile -C build flash
-run_target('flash',
-    command: [
-        'avrdude',
-        '-p', mcu,
-        '-c', 'arduino',      # Programmer type for Uno
-        '-P', '/dev/ttyACM0', # Default port, you can make this a variable
-        '-b', '115200',       # Baud rate for Uno
-        '-U', 'flash:w:@0@:i'.format(blink_hex.full_path())
-    ],
-    depends: blink_hex        # Ensure the HEX is built before flashing
-)
