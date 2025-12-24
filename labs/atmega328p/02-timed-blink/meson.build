@@ -1,11 +1,11 @@
-# labs/atmega328p/01-blink/meson.build
+# labs/atmega328p/02-timed-blink/meson.build
 
-# Define the lab name here
-lab_name = '02-timed-blink'
+# Project-level definition for this lab
+project_lab_name = '02-timed-blink'
 
-# Construct the relative install path: atmega328p/01-blink/bin
-# (mcu is inherited from atmega328p/meson.build)
-lab_bin_dir = mcu / lab_name / 'bin'
+# Ensure 'mcu' is defined (usually passed from the parent directory)
+# We use join_paths or the / operator, but ensure both are strings
+lab_bin_dir = mcu / project_lab_name / 'bin'
 
 # Now call the sub-components
 subdir('asm')
