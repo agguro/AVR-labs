@@ -2,6 +2,16 @@
 
 This lab demonstrates the complete workflow of deconstructing an AVR binary and recreating it in pure, cycle-accurate Assembly. Students will move from high-level C++ abstraction down to direct register manipulation.
 
+## Hardware Setup
+
+While the Arduino has a built-in LED on Pin 13, you can connect an external LED for better visibility:
+
+1. **LED Anode (Long Leg)**: Connect to **Digital Pin 13**.
+2. **Resistor (220Ω)**: Connect one end to the **LED Cathode (Short Leg)** and the other to **GND**.
+3. **Resistor Color Code**: Red-Red-Brown (indicates 220 ohms).
+
+*Note: The ATmega328P bit for this pin is **PB5** (Bit 5 of Port B).*
+
 ## Workflow
 
 1. **Reversing**: Extracting logic from an existing binary to understand hardware initialization.

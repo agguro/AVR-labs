@@ -2,6 +2,16 @@
 
 This lab moves beyond software-based delay loops to explore the precise world of hardware-timed execution. You will configure the ATmega328P's 16-bit Timer1 to handle the blink timing independently of the main execution thread.
 
+## Hardware Setup
+
+While the Arduino has a built-in LED on Pin 13, you can connect an external LED for better visibility:
+
+1. **LED Anode (Long Leg)**: Connect to **Digital Pin 13**.
+2. **Resistor (220Ω)**: Connect one end to the **LED Cathode (Short Leg)** and the other to **GND**.
+3. **Resistor Color Code**: Red-Red-Brown (indicates 220 ohms).
+
+*Note: The ATmega328P bit for this pin is **PB5** (Bit 5 of Port B).*
+
 ## Workflow
 
 1. **Precision Timing**: Calculating the exact OCR1A values for a 1Hz blink at a 16MHz clock speed.
