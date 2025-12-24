@@ -1,30 +1,52 @@
-Project Overview: Mastering the ATmega328P
+# Lab 02: Timed Blink (Hardware Timers & Interrupts)
 
-File: Project_Notes.txt
-1. The Assembly Logic (Timed Blink)
+This lab moves beyond software-based delay loops to explore the precise world of hardware-timed execution. You will configure the ATmega328P's 16-bit Timer1 to handle the blink timing independently of the main execution thread.
 
-We replaced the standard Arduino C++ abstraction with raw Assembly to gain precision and minimize overhead.
+## Workflow
 
-    Goal: Blink the built-in LED (PB5 / Digital Pin 13) every 1 second using an interrupt, allowing the main_loop to remain empty.
+1. **Precision Timing**: Calculating the exact OCR1A values for a 1Hz blink at a 16MHz clock speed.
+2. **CTC Mode Setup**: Configuring the "Clear Timer on Compare Match" mode to automate the timing cycle.
+3. **Interrupt Handling**: Implementing an Interrupt Service Routine (ISR) to toggle the LED, allowing the main loop to remain idle.
+4. **Logic Verification**: Using the simulator to ensure the interrupt triggers at the correct cycle count.
 
-    The Timer: We used Timer/Counter 1 (16-bit).
+---
 
-        Mode: CTC (Clear Timer on Compare Match). The hardware automatically resets the counter to zero when it hits the target value.
+## How the Program Works
 
-        Math: At a 16MHz clock speed with a 1024 prescaler, the timer ticks 15,625 times per second (16,000,000/1024).
+This lab utilizes the **16-bit Timer/Counter 1**:
+* **Prescaler**: Set to 1024, reducing the 16MHz clock to 15,625 ticks per second.
+* **OCR1A (Output Compare Register A)**: Set to 7,811 ($0x1E83$) to trigger an interrupt every 0.5 seconds.
+* **Toggling**: The ISR uses the **PINB** hardware toggle trick (`out PINB, reg`) to flip the LED state with a single instruction.
+* **The Main Loop**: In this lab, the main loop is simply an infinite `rjmp` to itself, demonstrating that the hardware is now doing the "heavy lifting" for the timing.
 
-        Compare Value: We set OCR1A to 15624 (0 to 15624 = 15,625 counts).
+---
 
-    The Toggle Trick: Instead of reading the state of the pin and flipping it, we wrote a 1 to the PINB register (Address 0x03). In AVR architecture, writing a 1 to a PIN register bit toggles the corresponding PORT register bit instantly.
+## Commands
 
-2. Critical Lessons Learned
+Execute these commands from the project root using the `ninja` build tool.
 
-Through our troubleshooting, we identified several "gotchas" that often trip up assembly programmers:
+### 1. Simulation (The Virtual Environment)
+* **Start Visualizer**: `ninja -C build 02-timedblink-view`
+  * *Opens the graphical LED window and waits for the timer-driven socket connection.*
+* **Start MCU**: `ninja -C build 02-timedblink-run`
+  * *Observe how the simulator handles interrupts by watching the program counter jump to the vector table.*
 
-    Register Addresses (0x80 vs 0xA0): While some chips use 0xA0 for Timer1, the ATmega328P uses 0x80. Using the wrong address means the CPU is writing data into "empty air," and the timer never starts.
+### 2. Deployment (The Real World)
+* **Flash Hardware**: `ninja -C build 02-timedblink-flash`
+  * *Deploys the timer-driven assembly code to your physical Arduino Uno.*
+* **Debug Flash**: `ninja -C build 02-timedblink-flash-debug`
+  * *Provides a full verbose report of the hardware handshake and memory writing process.*
 
-    Interrupt Vector Table (IVT): The hardware expects the "Jump" to the Timer ISR to be at a specific byte address. For the 328P, Timer1 Compare Match A is at 0x0022. If this is misaligned, the interrupt will trigger, but the CPU will jump into the wrong code and likely crash.
+### 3. Advanced: Extraction & Analysis
+* **Recover Firmware**: `ninja -C build flash-recover`
+  * *Dumps the chip's current Flash memory to `global_backup.hex`.*
+* **Disassemble**: `avr-objdump -m avr5 -D global_backup.hex`
+  * *Challenge: Locate the Interrupt Vector Table at the beginning of the disassembly and find the `jmp` instruction pointing to your ISR.*
 
-    Stack Discipline: The Stack Pointer (SP) must be initialized to the end of RAM (0x08FF). Furthermore, for every push in an ISR, there must be a corresponding pop. If the stack is unbalanced, the reti instruction will grab a "return address" that is actually your saved data, causing a "stack smash" and restart.
+---
 
-    Bootloader Safety: Flashing via the USB cable uses the existing bootloader. This means the bootloader section at the "high" end of memory is safe, while your assembly code occupies the "application" section starting at 0x0000.
+## Troubleshooting
+
+* **LED Blinks too Fast**: Ensure you have correctly set the three prescaler bits (CS12, CS11, CS10) in the `TCCR1B` register for the 1024 divider.
+* **Interrupt Never Fires**: Double-check that you have executed the `sei` (Set Global Interrupt) instruction in your setup code. Without this, the CPU will ignore the timer's compare signals.
+* **Simulation Mismatch**: If the virtual LED doesn't blink but the real one does, ensure the Unix Socket path in `02-timedblink/meson.build` is unique to this lab.
