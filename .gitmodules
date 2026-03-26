@@ -1,0 +1,3 @@
+[submodule "subprojects/simavr"]
+	path = subprojects/simavr
+	url = https://github.com/buserror/simavr.git
