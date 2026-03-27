@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>AVR Simulator Dashboard</h1>
+    <div id="led" style="width:100px; height:100px; border-radius:50%; background-color:gray; border: 3px solid black;"></div>
+    <p>Status: <span id="status">OFF</span></p>
+
+    <script>
+        const ws = new WebSocket("ws://localhost:8000/ws");
+        const ledDiv = document.getElementById("led");
+        const statusText = document.getElementById("status");
+
+        ws.onmessage = (event) => {
+            if (event.data === "1") {
+                ledDiv.style.backgroundColor = "red";
+                statusText.innerText = "ON";
+            } else {
+                ledDiv.style.backgroundColor = "gray";
+                statusText.innerText = "OFF";
+            }
+        };
+    </script>
+</body>
+</html>
