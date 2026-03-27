@@ -2,7 +2,7 @@
 
 flash_exe = executable(
   'flash',
-  'flash-new.c',
+  'flash.c',
   install: true,
   install_dir: 'bin'
 )

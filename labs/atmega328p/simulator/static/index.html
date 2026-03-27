@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arduino Uno R3 Hardware Simulator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #2c3e50; /* Iets donkerdere, neutrale kleur */
+            color: #eee;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            color: #ecf0f1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        #status-container {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            background: rgba(0,0,0,0.2);
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        /* Container voor de Arduino afbeelding en de overlay LED */
+        #arduino-container {
+            position: relative; /* Cruciaal voor absolute positionering van de LED */
+            display: inline-block;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            border-radius: 12px;
+            overflow: hidden; /* Houdt de afbeelding binnen de randen */
+            border: 2px solid #34495e;
+        }
+
+        /* De Arduino Uno R3 afbeelding die je hebt meegeleverd */
+        #arduino-board {
+            display: block;
+            width: 800px; /* Grootte van het bord op het scherm */
+            height: auto;
+        }
+
+        /* De virtuele LED overlay (Pin 13 "L" LED) */
+        #pin13-led {
+            position: absolute;
+            /* === Positionering t.o.v. de afbeelding (UNO R3 Layout) === */
+            /* Deze waarden plaatsen de LED over de kleine 'L' LED op jouw bord */
+            top: 236px;  /* Verticale positie van de 'L' LED */
+            left: 218px; /* Horizontale positie van de 'L' LED t.o.v. de linkerkant */
+            /* ========================================================= */
+            
+            width: 16px;  /* Iets grotere LED voor zichtbaarheid */
+            height: 16px;
+            background-color: rgba(255, 255, 0, 0.05); /* Zeer flauwe gele gloed bij UIT */
+            border-radius: 2px; /* Uno LED's zijn vaak vierkantig */
+            
+            /* Overgangseffect voor soepel knipperen */
+            transition: background-color 0.05s ease-in-out, box-shadow 0.05s ease-in-out;
+            
+            /* Zorg dat de LED 'op' de afbeelding ligt */
+            z-index: 10; 
+        }
+
+        /* De 'AAN' status van de LED (felle gele gloed) */
+        #pin13-led.led-on {
+            background-color: rgba(255, 255, 0, 1) !important; /* Fel geel */
+            box-shadow: 0 0 18px 6px rgba(255, 255, 0, 0.8) !important; /* Felle gloed */
+        }
+
+        /* Styling voor status labels */
+        .status-label {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Arduino Uno R3 Simulator</h1>
+    
+    <div id="status-container">
+        <span class="status-label">WebSocket:</span> <span id="ws-status" style="color: gray;">Verbinden...</span> | 
+        <span class="status-label">On-Board LED (Pin 13):</span> <span id="led-status" style="color: gray;">OFF</span>
+    </div>
+
+    <div id="arduino-container">
+        <img id="arduino-board" src="/static/arduino_uno_r3.svg" alt="Arduino Uno R3 Layout">
+        
+        <div id="pin13-led"></div>
+    </div>
+
+    <script>
+        // Setup WebSocket verbinding t.o.v. de huidige host
+        const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+        const wsUrl = `${wsProtocol}//${window.location.host}/ws`;
+        const ws = new WebSocket(wsUrl);
+
+        // DOM Elementen
+        const ledOverlay = document.getElementById('pin13-led');
+        const wsStatusText = document.getElementById('ws-status');
+        const ledStatusText = document.getElementById('led-status');
+
+        // WebSocket events
+        ws.onopen = () => {
+            console.log("WebSocket verbonden!");
+            wsStatusText.innerText = "VERBONDEN";
+            wsStatusText.style.color = "#4caf50"; // Groen
+        };
+
+        ws.onclose = () => {
+            console.log("WebSocket verbinding verbroken.");
+            wsStatusText.innerText = "VERBROKEN";
+            wsStatusText.style.color = "#f44336"; // Rood
+            
+            // LED ook uitzetten bij verbroken verbinding
+            ledOverlay.classList.remove('led-on');
+            ledStatusText.innerText = 'OFF';
+            ledStatusText.style.color = "gray";
+        };
+
+        ws.onerror = (error) => {
+            console.error("WebSocket Fout:", error);
+            wsStatusText.innerText = "FOUT";
+            wsStatusText.style.color = "#f44336";
+        };
+
+        // Data verwerken van de bridge (C -> Python -> Browser)
+        ws.onmessage = (event) => {
+            // Debugging: console.log("Data ontvangen:", event.data);
+            
+            // We kijken naar het laatste karakter van de ontvangen data
+            const lastChar = event.data.slice(-1);
+            
+            if (lastChar === '1') {
+                // LED AAN (Pin 13 Hoog)
+                ledOverlay.classList.add('led-on');
+                ledStatusText.innerText = 'ON';
+                ledStatusText.style.color = "yellow";
+            } else if (lastChar === '0') {
+                // LED UIT (Pin 13 Laag)
+                ledOverlay.classList.remove('led-on');
+                ledStatusText.innerText = 'OFF';
+                ledStatusText.style.color = "gray";
+            }
+        };
+
+    </script>
+</body>
+</html>
