@@ -1,4 +1,4 @@
-# labs/atmega328p/01-blink/asm/meson.build
+# /platforms/atmega328p/labs/01-blink/meson.build
 
 # Stage 1: Assemble the reversed source into an object file
 blink_obj = custom_target(

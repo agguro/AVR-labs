@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RGB LED Simulator</title>
+<style>
+  body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+
+  .led {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 20px auto;
+    background: black;
+    box-shadow: 0 0 20px #000;
+    transition: 0.2s;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px;
+  }
+
+  label {
+    font-size: 18px;
+  }
+
+  .mode {
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<h1>RGB LED Simulator</h1>
+
+<div class="led" id="led"></div>
+
+<div class="controls">
+  <label><input type="checkbox" id="r"> Red (Pin)</label>
+  <label><input type="checkbox" id="g"> Green (Pin)</label>
+  <label><input type="checkbox" id="b"> Blue (Pin)</label>
+</div>
+
+<div class="mode">
+  <label>
+    Mode:
+    <select id="mode">
+      <option value="cathode">Common Cathode (HIGH = ON)</option>
+      <option value="anode">Common Anode (LOW = ON)</option>
+    </select>
+  </label>
+</div>
+
+<script>
+function updateLED() {
+  let r = document.getElementById('r').checked;
+  let g = document.getElementById('g').checked;
+  let b = document.getElementById('b').checked;
+  let mode = document.getElementById('mode').value;
+
+  // Bij common anode is logica omgekeerd
+  if(mode === "anode") {
+    r = !r;
+    g = !g;
+    b = !b;
+  }
+
+  let red   = r ? 255 : 0;
+  let green = g ? 255 : 0;
+  let blue  = b ? 255 : 0;
+
+  let led = document.getElementById('led');
+  led.style.background = `rgb(${red},${green},${blue})`;
+
+  // glow effect
+  led.style.boxShadow = `0 0 30px rgb(${red},${green},${blue})`;
+}
+
+// listeners
+document.getElementById('r').onchange = updateLED;
+document.getElementById('g').onchange = updateLED;
+document.getElementById('b').onchange = updateLED;
+document.getElementById('mode').onchange = updateLED;
+
+// init
+updateLED();
+</script>
+
+</body>
+</html>

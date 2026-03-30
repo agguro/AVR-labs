@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>8x8 LED Matrix Simulator (Multiplexed)</title>
+<style>
+  body { font-family: sans-serif; text-align: center; }
+
+  .matrix {
+    display: grid;
+    grid-template-columns: repeat(8, 30px);
+    gap: 5px;
+    justify-content: center;
+    margin: 20px;
+  }
+
+  .led {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #222;
+  }
+
+  .led.on {
+    background: red;
+    box-shadow: 0 0 10px red;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+  }
+
+  .group {
+    text-align: left;
+  }
+
+  textarea {
+    width: 420px;
+    height: 120px;
+    margin-top: 20px;
+    font-family: monospace;
+  }
+</style>
+</head>
+<body>
+
+<h1>8x8 LED Matrix Simulator (Multiplexed)</h1>
+
+<div class="matrix" id="matrix"></div>
+
+<div class="controls">
+  <div class="group">
+    <h3>Rows (HIGH = 1)</h3>
+    <div id="rows"></div>
+  </div>
+
+  <div class="group">
+    <h3>Columns (LOW = active)</h3>
+    <div id="cols"></div>
+  </div>
+</div>
+
+<h3>Output (ROW / COL)</h3>
+<textarea id="output" readonly></textarea>
+
+<script>
+const matrix = document.getElementById("matrix");
+const rowsDiv = document.getElementById("rows");
+const colsDiv = document.getElementById("cols");
+const output = document.getElementById("output");
+
+let rows = new Array(8).fill(false);
+let cols = new Array(8).fill(false);
+let leds = [];
+
+// Create matrix LEDs
+for(let r=0;r<8;r++){
+  leds[r] = [];
+  for(let c=0;c<8;c++){
+    let led = document.createElement("div");
+    led.className = "led";
+    matrix.appendChild(led);
+    leds[r][c] = led;
+  }
+}
+
+// Create checkboxes for rows
+for(let i=0;i<8;i++){
+  let cb = document.createElement("input");
+  cb.type = "checkbox";
+  cb.onchange = () => { rows[i]=cb.checked; };
+  rowsDiv.appendChild(cb);
+  rowsDiv.appendChild(document.createTextNode(" R"+i));
+  rowsDiv.appendChild(document.createElement("br"));
+}
+
+// Create checkboxes for cols
+for(let i=0;i<8;i++){
+  let cb = document.createElement("input");
+  cb.type = "checkbox";
+  cb.onchange = () => { cols[i]=cb.checked; };
+  colsDiv.appendChild(cb);
+  colsDiv.appendChild(document.createTextNode(" C"+i));
+  colsDiv.appendChild(document.createElement("br"));
+}
+
+function update(){
+  // Compute bytes
+  let rowByte = 0;
+  let colByte = 0;
+  for(let r=0;r<8;r++) if(rows[r]) rowByte |= (1 << r);
+  for(let c=0;c<8;c++) if(cols[c]) colByte |= (1 << c);
+  let colOut = (~colByte) & 0xFF;
+
+  // Multiplex simulation: scan rows
+  for(let r=0;r<8;r++){
+    for(let c=0;c<8;c++){
+      if(((rowByte>>r)&1) && !((colOut>>c)&1)){
+        leds[r][c].classList.add("on");
+      } else {
+        leds[r][c].classList.remove("on");
+      }
+    }
+  }
+
+  // Display bytes for NASM output
+  let rb = rowByte.toString(2).padStart(8,'0');
+  let cb = colOut.toString(2).padStart(8,'0');
+  output.value = "row: " + rb + "\ncol: " + cb;
+}
+
+// Repeated scan for multiplex effect
+setInterval(update, 50); // 20 Hz refresh rate
+</script>
+
+</body>
+</html>

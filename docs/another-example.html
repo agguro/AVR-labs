@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Virtual Kids Eye / Mexican Wave</title>
+<style>
+  body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+  .led-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+  .led { width: 40px; height: 40px; border-radius: 50%; background: #222; box-shadow: 0 0 5px #000; transition: 0.2s; }
+  .led.on { background: red; box-shadow: 0 0 20px red; }
+  input[type="text"] { width: 150px; font-size: 16px; text-align: center; }
+  button { font-size: 16px; padding: 5px 10px; }
+</style>
+</head>
+<body>
+
+<h1>Virtual Kids Eye / Mexican Wave</h1>
+<div class="led-container" id="leds">
+  <div class="led" id="led0"></div>
+  <div class="led" id="led1"></div>
+  <div class="led" id="led2"></div>
+  <div class="led" id="led3"></div>
+  <div class="led" id="led4"></div>
+  <div class="led" id="led5"></div>
+  <div class="led" id="led6"></div>
+  <div class="led" id="led7"></div>
+</div>
+
+<label>Enter byte (0–255): </label>
+<input type="text" id="byteInput" value="3">
+<button onclick="sendByte()">Send</button>
+
+<script>
+  // Functie: stuur byte naar LEDs
+  function sendByte() {
+    let val = parseInt(document.getElementById('byteInput').value);
+    if(isNaN(val) || val < 0 || val > 255) {
+      alert("Enter a number between 0 and 255");
+      return;
+    }
+    for(let i=0;i<8;i++){
+      let led = document.getElementById('led'+i);
+      if(val & (1 << i)) led.classList.add('on');
+      else led.classList.remove('on');
+    }
+  }
+
+  // --- Automatische Kids Eye / Mexican Wave ---
+  let wavePatterns1 = [
+    0b00000001, // D2 alleen
+    0b00000011, // D2-D3
+    0b00000110, // D3-D4
+    0b00001100, // D4-D5
+    0b00011000, // D5-D6
+    0b00110000, // D6-D7
+    0b01100000, // D7-D8
+    0b11000000, // D8-D9
+    0b10000000  // D9 alleen
+  ];
+  
+  // --- Automatische Kids Eye / Mexican Wave ---
+  let wavePatterns = [
+    0b00000000,
+    0b00011000, // D2 alleen
+    0b00111100, // D2-D3
+    0b01111110, // D3-D4
+    0b11111111, // D4-D5
+    0b11111111, // D4-D5    
+    0b11100111, // D5-D6
+    0b11000011, // D6-D7
+    0b10000001, // D7-D8
+    0b00000000, // D8-D9
+  ];
+  
+
+  let index = 0;
+  let dir = 1;  // +1 = vooruit, -1 = terug
+
+  setInterval(()=>{
+    document.getElementById('byteInput').value = wavePatterns[index];
+    sendByte();
+
+    // Volgende index
+    index += dir;
+
+    // Bounce heen en terug
+    if(index >= wavePatterns.length-1) dir = -1;
+    if(index <= 0) dir = 1;
+  }, 200);
+</script>
+
+</body>
+</html>

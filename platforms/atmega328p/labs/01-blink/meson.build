@@ -1,23 +1,31 @@
-# labs/atmega328p/01-blink/meson.build
+# /platforms/atmega328p/labs/01-blink/meson.build
 
-project_lab_name = '01-blink'
-lab_socket_path  = '/tmp/' + project_lab_name + '.sock'
-
-# 1. Build the specific parts for this lab
-# Note: subdir('asm') will define 'blink_elf'
-subdir('asm')        
-subdir('simulator')  
-
-# 2. Create the unique Ninja commands for this specific lab
-run_target(project_lab_name + '-run',
-    command: [virt_mcu_bin, blink_elf, lab_socket_path]
+# Stage 1: Assemble the reversed source into an object file
+blink_obj = custom_target(
+    'blink-o',
+    input: 'blink.s',
+    output: 'blink.o',
+    command: [ avr_as,'-mmcu='+mcu, '-o', '@OUTPUT@', '@INPUT@' ],
+    install: false
 )
 
-run_target(project_lab_name + '-view',
-    command: [simulate, lab_socket_path]
+# Stage 2: Link
+blink_elf = custom_target(
+    'blink-elf',
+    input: [ blink_obj, 'blink.ld' ],
+    output: 'blink.elf',
+    command: [ avr_ld, '-m'+emulation,'-T', '@INPUT1@', '-o', '@OUTPUT@', '@INPUT0@' ],
+    install: true,
+    install_dir: lab_bin_dir
 )
 
-run_target(project_lab_name + '-flash',
-    command: [flash_exe,'-v', blink_hex]
+# Stage 3: Extract HEX
+blink_hex = custom_target(
+    'blink-hex',
+    input: blink_elf,
+    output: 'blink.hex',
+    command: [ avr_objcopy, '-O', 'ihex', '@INPUT@', '@OUTPUT@' ],
+    build_by_default: true,
+    install: true,
+    install_dir: lab_bin_dir
 )
-

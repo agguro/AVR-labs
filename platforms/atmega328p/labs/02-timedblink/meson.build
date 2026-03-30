@@ -1,23 +1,32 @@
-# labs/atmega328p/02-timedblink/meson.build
+# labs/atmega328p/02-timedblink/asm/meson.build
 
-project_lab_name = '02-timedblink'
-lab_socket_path  = '/tmp/' + project_lab_name + '.sock'
-
-# 1. Build the specific parts for this lab
-# Note: subdir('asm') will define 'timedblink_elf'
-subdir('asm')        
-subdir('simulator')  
-
-# 2. Create the unique Ninja commands for this specific lab
-run_target(project_lab_name + '-run',
-    command: [virt_mcu_bin, timedblink_elf, lab_socket_path]
+# Stage 1: Assemble the reversed source into an object file
+timedblink_obj = custom_target(
+    'timedblink-o',
+    input: 'timedblink.s',
+    output: 'timedblink.o',
+    command: [ avr_as, '-mmcu='+mcu , '-o', '@OUTPUT@', '@INPUT@' ],
+    install: false
 )
 
-run_target(project_lab_name + '-view',
-    command: [simulate, lab_socket_path]
+# Stage 2: Link
+timedblink_elf = custom_target(
+    'timedblink-elf',
+    input: [ timedblink_obj, 'timedblink.ld' ],
+    output: 'timedblink.elf',
+    command: [ avr_ld, '-m'+emulation,'-T', '@INPUT1@', '-o', '@OUTPUT@', '@INPUT0@' ],
+    install: true,
+    install_dir: lab_bin_dir  # <--- Use the variable
 )
 
-run_target(project_lab_name + '-flash',
-    command: [flash_exe,'-v', timedblink_hex]
+# Stage 3: Extract HEX
+timedblink_hex = custom_target(
+    'timedblink_hex',
+    input: timedblink_elf,
+    output: 'timedblink.hex',
+    command: [ avr_objcopy, '-O', 'ihex', '@INPUT@', '@OUTPUT@' ],
+    build_by_default: true,
+    install: true,
+    install_dir: lab_bin_dir
 )
 
